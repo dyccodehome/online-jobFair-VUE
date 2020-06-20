@@ -14,7 +14,7 @@
         <div>
           <br class="input-group">
           <input type="text" class="form-control" placeholder="用户名" v-model="username"><br>
-          <input type="text" class="form-control" placeholder="密码" v-model="password"><br>
+          <input type="password" class="form-control" placeholder="密码" v-model="password"><br>
 <!--          <input type="text" class="form-control" placeholder="确认密码" v-model="pwdconfirm"><br>-->
           <div>
             <input type="text" class="form-control" placeholder="性别" v-model="sex" style="width: 120px">
@@ -24,7 +24,7 @@
           </div><br>
           <input type="text" class="form-control" placeholder="联系电话" v-model="phone">
           <div class="btn">
-            <b-button variant="success" size="lg">注册</b-button><br>
+            <b-button variant="success" size="lg" @click="signupClick">注册</b-button><br>
           </div>
           <p class="message">"点击 “注册” 即表示您同意并愿意遵守"<br>
             <a target="_blank" href="http://www.jianshu.com/p/c44d171298ce">用户协议</a>" 和 "
@@ -54,12 +54,12 @@
       signupClick() {
         var that = this;
         this.$http
-          .post('http://localhost:8080/user/sign_up', {"username": this.account, "password": this.password,"sex":this.sex,"age":this.age,"phone":this.phone})
+          .post('http://localhost:8080/sys/api/addApplicant', {"name": this.username,"sex":this.sex,"age":this.age,"phone":this.phone})
           .then(function (response) {
-            if (response.data.data === null) {
+            if (response.data.data === 1) {
               alert("账号已被注册");
               that.$router.go(0);
-            } else {
+            } else if(response.data.data === null){
               alert("注册成功");
               that.$router.go(0);
             }
