@@ -1,8 +1,9 @@
 <template>
   <div class="main">
     <div class="title">
-      <h2>人才招聘网</h2>
+      <router-link to="/sign_in"><h2>人才招聘网</h2></router-link>
     </div>
+    <router-link to="/company_sign_up"><el-button type="success" round style="float: right;margin-top: 25px">企业注册</el-button></router-link>
     <div class="sign">
       <div class="row">
         <router-link to="/sign_in"><h3 class="sign_in active">登录</h3></router-link>
@@ -12,9 +13,16 @@
       <div class="wirte">
         <div>
           <br class="input-group">
-          <input type="text" class="form-control" placeholder="税务登记号/手机号"><br>
-          <input type="text" class="form-control" placeholder="密码"><br>
-          <input type="text" class="form-control" placeholder="确认密码">
+          <input type="text" class="form-control" placeholder="用户名" v-model="username"><br>
+          <input type="text" class="form-control" placeholder="密码" v-model="password"><br>
+<!--          <input type="text" class="form-control" placeholder="确认密码" v-model="pwdconfirm"><br>-->
+          <div>
+            <input type="text" class="form-control" placeholder="性别" v-model="sex" style="width: 120px">
+            <span style="float: right">
+              <input type="text" class="form-control" placeholder="年龄" v-model="age" style="width: 120px;margin-top: -38px">
+            </span>
+          </div><br>
+          <input type="text" class="form-control" placeholder="联系电话" v-model="phone">
           <div class="btn">
             <b-button variant="success" size="lg">注册</b-button><br>
           </div>
@@ -29,12 +37,16 @@
 
 <script>
 
+  let pwdCheck;
   export default {
     name: "SignUp",
     data() {
       return {
-        account: '',
+        username: '',
         password: '',
+        sex:'',
+        age:'',
+        phone:'',
         user: JSON.parse(localStorage.getItem('loginUser'))
       }
     },
@@ -42,7 +54,7 @@
       signupClick() {
         var that = this;
         this.$http
-          .post('http://localhost:8080/user/sign_up', {"account": this.account, "password": this.password})
+          .post('http://localhost:8080/user/sign_up', {"username": this.account, "password": this.password,"sex":this.sex,"age":this.age,"phone":this.phone})
           .then(function (response) {
             if (response.data.data === null) {
               alert("账号已被注册");
@@ -53,7 +65,7 @@
             }
           })
       },
-    }
+    },
   }
 </script>
 
@@ -70,8 +82,6 @@
     position: absolute;
     margin: 2%;
     color: cornflowerblue;
-    /*top: 56px;*/
-    /*margin-left: 50px;*/
   }
   .sign {
     width: 400px;

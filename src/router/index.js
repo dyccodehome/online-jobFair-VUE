@@ -9,6 +9,7 @@ import CompanyHome from '@/components/company/company-home'
 import Information from '@/components/company/information'
 import QueryResume from '@/components/company/query-resume'
 import Recruit from '@/components/company/recruit'
+import CompanySignUp from "../components/Signin&SignUp/CompanySignUp";
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
           path:'/sign_up',
           name:'注册',
           component:SignUp,
+        },
+        {
+          path: '/company_sign_up',
+          name:'企业注册',
+          component:CompanySignUp
         }
       ]
     },

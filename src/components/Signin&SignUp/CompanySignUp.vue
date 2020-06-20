@@ -1,25 +1,24 @@
 <template>
   <div class="main">
     <div class="title">
-      <router-link to="/sign_in"><h2>人才招聘网</h2></router-link>
+      <router-link to="/sign_in"><h2>人才招聘网（企业入驻）</h2></router-link>
     </div>
+    <router-link to="/sign_up"><el-button type="success" round style="float: right;margin-top: 25px">个人注册</el-button></router-link>
     <div class="sign">
       <div class="row">
-        <router-link to="/sign_in"><h3 class="sign_in active">登录</h3></router-link>
-        <a><h3>·</h3></a>
-        <router-link to="/sign_up"><h3 class="sign_up">注册</h3></router-link>
+        <router-link to="/sign_up"><h3 class="sign_up" style="text-align: center;margin-left: 100px">企业注册</h3></router-link>
       </div>
       <div class="wirte">
         <div>
           <br class="input-group">
-            <input type="text" class="form-control" placeholder="税务登记号/用户名" v-model="username">
+          <input type="text" class="form-control" placeholder="税务登记号" v-model="username">
           <br>
-            <input type="password" class="form-control" placeholder="密码" v-model="password">
+          <input type="password" class="form-control" placeholder="密码" v-model="password">
           <div class="rember">
 
           </div><br>
           <div class="btn">
-            <b-button variant="primary" size="lg" @click="onClick">登录</b-button>
+            <b-button variant="success" size="lg" @click="onClick">注册</b-button>
           </div>
         </div>
       </div>
@@ -39,24 +38,20 @@
       }
     },
     methods: {
-      onClick() {
+      signupClick() {
         var that = this;
         this.$http
-          .post('http://localhost:8080/user/sign_in', {"username": this.username, "password": this.password})
+          .post('http://localhost:8080/user/sign_up', {"username": this.account, "password": this.password})
           .then(function (response) {
-            //alert(JSON.stringify(response.data.data));
-            alert(response.data.msg);
-            localStorage.setItem("loginUser", JSON.stringify(response.data.data));
-            var identity = response.data.data.is_admin_role;
-            if (identity === 0) {
-              that.$router.push("/admin");
-            } else if (identity === 1) {
-              that.$router.push("/company");
-            } else if (identity === 2) {
-              that.$router.push("/applicant")
+            if (response.data.data === null) {
+              alert("税务登记号错误");
+              that.$router.go(0);
+            } else {
+              alert("注册成功");
+              that.$router.go(0);
             }
           })
-      }
+      },
     }
   }
 </script>
@@ -135,5 +130,7 @@
   ul li span{
     font-size: 18px;
   }
+  .row{
+    text-align: center;
+  }
 </style>
-
