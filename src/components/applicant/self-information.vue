@@ -1,13 +1,12 @@
 <template>
 <div>
-  <i-form :model="formItem" :label-width="210" style="width: 600px; margin-left: 30%;margin-top:20px" >
+  <i-form :model="formItem" :label-width="210" style="width: 600px; margin-left: 25%;margin-top:20px" >
         <Form-item label="个人昵称">
             <i-input v-model="formItem.name" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="性别">
             <i-select v-model="formItem.sex" placeholder="请选择">
-                <i-option value=0>男</i-option>
-                <i-option value=1>女</i-option>
+                <i-option v-for="item in itemList" :value="item.itemId" :key="item.itemId">{{item.name}}</i-option>
             </i-select>
         </Form-item>
        <Form-item label="年龄">
@@ -18,10 +17,9 @@
         </Form-item>
     </i-form>
     <div>
-        <div style="margin-top: 30px;float: right;">
+        <div style="margin-top: 30px;margin-left: 48%;">
             <Button
                     type="primary"
-                    :loading="saveLoading"
                     @click="saveEdit()"
             >保存</Button>
         </div>
@@ -43,17 +41,35 @@
                     'age': '',
                     'phone': '',
                 },
+                itemList:[
+                    {
+                        itemId:0,
+                        name:'男'
+                    },
+                    {
+                        itemId:1,
+                        name:'女'
+                    }
+                ],
                 Id:0
             };
         },
         methods: {
-            init () {
+             init () {
                 this.Id = localStorage.getItem("user_id");
+                axios.get('http://localhost:8080/sys/api/findApplicant',{
+                     params:{
+                         applicantId:this.Id,
+                     }
+                }).then(({data}) => {
+                    this.formItem = data;
+                    this.formItem.sex = data.sex;
+                });
+                
             },
             saveEdit() {
-                this.saveLoading = true;
                 axios.post('http://localhost:8080/sys/api/updateApplicant',{
-                        'Id': this.Id,
+                        'id': parseInt(this.Id),
                         'name': this.formItem.name,
                         'sex': this.formItem.sex,
                         'phone': this.formItem.phone,

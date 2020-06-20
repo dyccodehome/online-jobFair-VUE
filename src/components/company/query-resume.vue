@@ -141,9 +141,10 @@
                     },
                     {
                         title: '更新时间',
-                        key: 'update_time',
+                        key: 'updateTime',
+                        width:160,
                         render:(h,params)=>{
-                            let date = getDate(params.row.update_time,'yyyy-MM-dd hh:mm:ss');
+                            let date = getDate(params.row.updateTime,'yyyy-MM-dd hh:mm:ss');
                             return h('div',date)
                         },
                         align: 'center'
