@@ -6,14 +6,29 @@
     <router-link to="/sign_up"><el-button type="success" round style="float: right;margin-top: 25px">个人注册</el-button></router-link>
     <div class="sign">
       <div class="row">
-        <router-link to="/sign_up"><h3 class="sign_up" style="text-align: center;margin-left: 100px">企业注册</h3></router-link>
+        <router-link to="/sign_up"><h3 class="sign_up" style="text-align: center;margin-left: 200px">企业注册</h3></router-link>
       </div>
       <div class="wirte">
         <div>
           <br class="input-group">
-          <input type="text" class="form-control" placeholder="税务登记号" v-model="username">
+          <input type="text" class="form-control" placeholder="税务登记号" v-model="taxname">
           <br>
           <input type="password" class="form-control" placeholder="密码" v-model="password">
+          <br>
+          <div>
+            <input type="text" class="form-control" placeholder="企业名称" v-model="name" style="width: 220px"><br>
+            <span style="float: right">
+              <input type="text" class="form-control" placeholder="企业法人" v-model="leagal_person" style="width: 220px;margin-top: -59px"><br>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="企业地址" v-model="address"><br>
+          <div>
+            <input type="text" class="form-control" placeholder="经营范围" v-model="scope" style="width: 220px"><br>
+            <span style="float: right">
+              <input type="text" class="form-control" placeholder="注册资本" v-model="registered_capital" style="width: 220px;margin-top: -59px"><br>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="联系方式" v-model="phone">
           <div class="rember">
 
           </div><br>
@@ -33,15 +48,20 @@
     name: "SignIn",
     data() {
       return {
-        username: '',
+        taxNumber: '',
         password: '',
+        address:'',
+        leagal_person:'',
+        scope:'',
+        registered_capital:'',
+        phone:''
       }
     },
     methods: {
       signupClick() {
         var that = this;
         this.$http
-          .post('http://localhost:8080/user/sign_up', {"username": this.account, "password": this.password})
+          .post('http://localhost:8080/sys/api/addCompany', {"taxNumber": this.taxNumber, "name": this.name,"address":this.address,"legalPerson":this.legalPerson,"scope":this.scope,"phone":this.phone,"regisitered_capital":this.regisitered_capital})
           .then(function (response) {
             if (response.data.data === null) {
               alert("税务登记号错误");
@@ -74,8 +94,8 @@
     /*margin-left: 50px;*/
   }
   .sign {
-    width: 400px;
-    margin: 150px auto 0;
+    width: 600px;
+    margin: 100px auto 0;
     padding: 50px 50px 30px;
     background-color: #fff;
     border-radius: 4px;
