@@ -5,33 +5,22 @@
             <i-input v-model="formItem.name" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="税务号">
-            <i-select v-model="formItem.type" placeholder="请选择">
-                <i-option value=0>身份证</i-option>
-                <i-option value=1>护照</i-option>
-            </i-select>
+            <i-input v-model="formItem.tax_number" placeholder="请输入"></i-input>
         </Form-item>
        <Form-item label="公司地址">
-            <i-input v-model="formItem.paperNumber" placeholder="请输入"></i-input>
+            <i-input v-model="formItem.address" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="手机号码">
             <i-input v-model="formItem.phone" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="企业法人" >
-            <Radio-group v-model="formItem.health">
-                <Radio v-for="item in selectList" :label="item.value" :key="item.value" >
-                    <span>{{item.label}}</span>
-                </Radio>
-            </Radio-group>
+            <i-input v-model="formItem.leagal_person" placeholder="请输入"></i-input>
         </Form-item>
-         <Form-item label="经营范围">
-            <Radio-group v-model="formItem.touch">
-                <Radio v-for="item in selectList" :label="item.value" :key="item.value" >
-                    <span>{{item.label}}</span>
-                </Radio>
-            </Radio-group>
+         <Form-item label="注册资本">
+            <i-input v-model="formItem.registered_capital" placeholder="请输入"></i-input>
         </Form-item>
-        <Form-item label="注册资本">
-            <i-input v-model="formItem.address" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入户籍地址"></i-input>
+        <Form-item label="经营范围">
+            <i-input v-model="formItem.scope" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入经营范围"></i-input>
         </Form-item>
         
     </i-form>
@@ -48,12 +37,12 @@
             return {
                 formItem:{
                     'name':'',
-                    'type': '',
-                    'paperNumber': '',
+                    'tax_number': '',
                     'phone': '',
                     'address':'',
-                    'health': '',
-                    'touch':'',
+                    'leagal_person':'',
+                    'registered_capital': '',
+                    'scope':'',
                 },
                 selectList:[
                     {
@@ -67,34 +56,34 @@
                 ]
             };
         },
+
+        
         methods: {
-            handleReset (name) {
-                this.$refs[name].resetFields();
+            init () {
+                this.Id = localStorage.getItem("user_id");
             },
-            
             saveEdit() {
-                            this.saveLoading = true;
-                            axios.post('http://localhost:8080/sys/api/addUser',{
-                                'Id': 0,
-                                'name': this.formItem.name,
-                                'type': parseInt(this.formItem.type),
-                                'paperNumber': this.formItem.paperNumber,
-                                'phone': this.formItem.phone,
-                                'address': this.formItem.address,
-                                'health':this.formItem.health,
-                                'touch':this.formItem.touch,
-                            },{headers:{'Content-Type': 'application/json; charset=utf-8'},dataType:"json",}).then(({data}) => {
-                                alert('打卡成功');
-                            }).catch(() => {
-                                this.saveLoading = false;
-                                this.$Message.error('连接失败，请检查网络！');
-                            });
+                this.saveLoading = true;
+                axios.post('http://localhost:8080/sys/api/addUser',{
+                            'Id': this.Id,
+                            'name': this.formItem.name,
+                            'tax_number': this.formItem.tax_number,
+                            'leagal_person': this.formItem.leagal_person,
+                            'phone': this.formItem.phone,
+                            'address': this.formItem.address,
+                            'registered_capital':this.formItem.registered_capital,
+                            'scope':this.formItem.scope,
+                    },{headers:{'Content-Type': 'application/json; charset=utf-8'},dataType:"json",}).then(({data}) => {
+                        alert('修改成功');
+                    }).catch(() => {
+                        this.saveLoading = false;
+                        this.$Message.error('连接失败，请检查网络！');
+                    });
             },
-            
-           
-            
         },
-       
+       mounted(){
+            this.init(); //初始化
+        }
     };
 </script>
 

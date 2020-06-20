@@ -1,15 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import SignIn from "../components/Signin&SignUp/SignIn";
+import SignUp from "../components/Signin&SignUp/SignUp";
+import Index from "../components/Index"
+import AdminHome from "../components/AdminHome";
+import ApplicantHome from "../components/applicant/applicant-home";
+import QueryRecruit from "../components/applicant/query-recruit";
+import Resume from "../components/applicant/resume";
+import Selfinformation from "../components/applicant/self-information";
 import CompanyHome from '@/components/company/company-home'
 import Information from '@/components/company/information'
 import QueryResume from '@/components/company/query-resume'
 import Recruit from '@/components/company/recruit'
+import CompanySignUp from "../components/Signin&SignUp/CompanySignUp";
 
 Vue.use(Router)
 
 
 export default new Router({
+  mode:"history",
   routes: [
     {
       path: '/',
@@ -17,8 +26,30 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'HelloWorld',
-       component: resolve => require(['../components/common/Home.vue'], resolve)
+      component:Index,
+      redirect:'/sign_in',
+      children:[
+        {
+          path:'/sign_in',
+          name:'登录',
+          component:SignIn,
+        },
+        {
+          path:'/sign_up',
+          name:'注册',
+          component:SignUp,
+        },
+        {
+          path: '/company_sign_up',
+          name:'企业注册',
+          component:CompanySignUp
+        }
+      ]
+    },
+    {
+      path: '/admin',
+      name:"管理员",
+      component: resolve => require(['../components/common/Home.vue'], resolve)
     },
     {
       path: '/table',
@@ -40,6 +71,17 @@ export default new Router({
           component: resolve => require(['../components/page/Tabs.vue'], resolve),
           meta: { title: '企业管理'}
         }
+      ]
+    },
+    {
+      path: '/applicant',
+      component: ApplicantHome,
+      name: 'applicant-home',
+      title:'应聘者主页',
+      children:[
+        { path: 'self-information',title: '个人信息', name: 'information', component: resolve => { require(['@/components/applicant/self-information.vue'],resolve);}},
+        { path: 'resume',title: '简历', name: 'resume', component: resolve => { require(['@/components/applicant/resume.vue'],resolve);}},
+        { path: 'queryRecruit',title: '招聘信息', name: 'queryRecruit', component: resolve => { require(['@/components/applicant/query-recruit.vue'],resolve);}},
       ]
     },
     {

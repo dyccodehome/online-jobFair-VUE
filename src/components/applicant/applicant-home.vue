@@ -4,18 +4,18 @@
         <h1 class="title">人才招聘系统</h1>
     </div>
     <Menu :theme="theme3" active-key="1" :active-name="$route.name" class="menu">
-        <Menu-group title="企业界面">
-            <Menu-item key="1" name="information" to="/company-home/information">
+        <Menu-group title="个人界面">
+            <Menu-item key="1" name="self-information" to="/applicant/self-information">
                 <Icon type="document-text"></Icon>
-                企业信息
+                个人信息
             </Menu-item>
-            <Menu-item key="2" name="recruit" to="/company-home/recruit">
+            <Menu-item key="2" name="resume" to="/applicant/resume">
                 <Icon type="chatbubbles"></Icon>
-                招聘信息
+                个人简历
             </Menu-item>
-            <Menu-item key="3" name="queryResume" to="/company-home/queryResume">
+            <Menu-item key="3" name="queryRecruit" to="/applicant/queryRecruit">
                 <Icon type="chatbubbles"></Icon>
-                简历查询
+                招聘信息查询
             </Menu-item>
         </Menu-group>
     </Menu>
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'company-home',
+  name: 'applicant-home',
   data () {
             return {
                 theme3: 'dark'
