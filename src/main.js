@@ -8,7 +8,6 @@ import element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import axios from 'axios'
 import iView from 'iview';
 import axios from 'axios';
 import ElementUI from 'element-ui';

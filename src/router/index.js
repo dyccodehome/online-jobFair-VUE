@@ -2,8 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import SignIn from "../components/Signin&SignUp/SignIn";
 import SignUp from "../components/Signin&SignUp/SignUp";
-import Index from "../components/Index"
+import Index from "../components/Index";
 import AdminHome from "../components/AdminHome";
+import Home from "../components/common/Home";
+import BaseTable from "../components/page/BaseTable";
+import Tabs from "../components/page/Tabs";
 import ApplicantHome from "../components/applicant/applicant-home";
 import QueryRecruit from "../components/applicant/query-recruit";
 import Resume from "../components/applicant/resume";
@@ -20,10 +23,10 @@ Vue.use(Router)
 export default new Router({
   mode:"history",
   routes: [
-    {
-      path: '/',
-      redirect: '/table'
-    },
+    // {
+    //   path: '/sign_in',
+    //   redirect: '/sign_in'
+    // },
     {
       path: '/',
       component:Index,
@@ -46,14 +49,10 @@ export default new Router({
         }
       ]
     },
+
     {
       path: '/admin',
-      name:"管理员",
-      component: resolve => require(['../components/common/Home.vue'], resolve)
-    },
-    {
-      path: '/table',
-      component: resolve => require(['@/components/common/Home.vue'], resolve),
+      component: Home,
       meta: { title: '自述文件'},
       children:[
         // {
@@ -62,13 +61,13 @@ export default new Router({
         //   meta: { title: '系统首页'}
         // },
         {
-          path: '/table',
-          component: resolve => require(['../components/page/BaseTable.vue'], resolve),
+          path: '/people',
+          component:BaseTable,
           meta: { title: '应聘者管理' }
         },
         {
-          path: '/tabs',
-          component: resolve => require(['../components/page/Tabs.vue'], resolve),
+          path: '/work',
+          component: Tabs,
           meta: { title: '企业管理'}
         }
       ]

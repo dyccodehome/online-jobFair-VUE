@@ -40,12 +40,12 @@
                     // },
                     {
                         icon: 'el-icon-tickets',
-                        index: 'table',
+                        index: 'people',
                         title: '应聘者管理'
                     },
                     {
                         icon: 'el-icon-message',
-                        index: 'tabs',
+                        index: 'work',
                         title: '企业管理'
                     }
                 ]
