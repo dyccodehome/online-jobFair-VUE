@@ -13,8 +13,34 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/table'
+    },
+    {
+      path: '/',
       name: 'HelloWorld',
-      component: HelloWorld
+       component: resolve => require(['../components/common/Home.vue'], resolve)
+    },
+    {
+      path: '/table',
+      component: resolve => require(['@/components/common/Home.vue'], resolve),
+      meta: { title: '自述文件'},
+      children:[
+        // {
+        //   path: '/dashboard',
+        //   component: resolve => require(['../components/page/Dashboard.vue'], resolve),
+        //   meta: { title: '系统首页'}
+        // },
+        {
+          path: '/table',
+          component: resolve => require(['../components/page/BaseTable.vue'], resolve),
+          meta: { title: '应聘者管理' }
+        },
+        {
+          path: '/tabs',
+          component: resolve => require(['../components/page/Tabs.vue'], resolve),
+          meta: { title: '企业管理'}
+        }
+      ]
     },
     {
       path: '/company-home',
