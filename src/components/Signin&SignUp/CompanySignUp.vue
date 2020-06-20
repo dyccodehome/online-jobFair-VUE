@@ -11,7 +11,7 @@
       <div class="wirte">
         <div>
           <br class="input-group">
-          <input type="text" class="form-control" placeholder="税务登记号" v-model="taxname">
+          <input type="text" class="form-control" placeholder="税务登记号" v-model="taxNumber">
           <br>
           <input type="password" class="form-control" placeholder="密码" v-model="password">
           <br>
@@ -33,7 +33,7 @@
 
           </div><br>
           <div class="btn">
-            <b-button variant="success" size="lg" @click="onClick">注册</b-button>
+            <b-button variant="success" size="lg" @click="signupClick">注册</b-button>
           </div>
         </div>
       </div>
@@ -61,8 +61,17 @@
       signupClick() {
         var that = this;
         this.$http
-          .post('http://localhost:8080/sys/api/addCompany', {"taxNumber": this.taxNumber, "name": this.name,"address":this.address,"legalPerson":this.legalPerson,"scope":this.scope,"phone":this.phone,"regisitered_capital":this.regisitered_capital})
-          .then(function (response) {
+          .post('http://localhost:8080/user/company/sign_up', 
+          {
+            "taxNumber": this.taxNumber, 
+            "name": this.name,
+            "address":this.address,
+            "legalPerson":this.leagal_person,
+            "scope":this.scope,
+            "phone":this.phone,
+            "registeredCapital":this.registered_capital
+          }
+          ).then(function (response) {
             if (response.data.data === null) {
               alert("税务登记号错误");
               that.$router.go(0);

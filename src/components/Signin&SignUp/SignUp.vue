@@ -52,14 +52,25 @@
     },
     methods : {
       signupClick() {
+        let sexId;
+        if(this.sex === "男"){
+           sexId = 0;
+        }else{
+          sexId = 1;
+        }
         var that = this;
         this.$http
-          .post('http://localhost:8080/sys/api/addApplicant', {"name": this.username,"sex":this.sex,"age":this.age,"phone":this.phone})
-          .then(function (response) {
+          .post('http://localhost:8080/user/applicant/sign_up', {
+            "name": this.username,
+            "sex":sexId,
+            "age":this.age,
+            "phone":this.phone
+            }
+            ).then(function (response) {
             if (response.data.data === 1) {
               alert("账号已被注册");
               that.$router.go(0);
-            } else if(response.data.data === null){
+            } else{
               alert("注册成功");
               that.$router.go(0);
             }
