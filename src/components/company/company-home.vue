@@ -5,15 +5,15 @@
     </div>
     <Menu :theme="theme3" active-key="1" :active-name="$route.name" class="menu">
         <Menu-group title="企业界面">
-            <Menu-item key="1" name="information" to="information">
+            <Menu-item key="1" name="information" to="/company-home/information">
                 <Icon type="document-text"></Icon>
                 企业信息
             </Menu-item>
-            <Menu-item key="2" name="recruit" to="recruit">
+            <Menu-item key="2" name="recruit" to="/company-home/recruit">
                 <Icon type="chatbubbles"></Icon>
                 招聘信息
             </Menu-item>
-            <Menu-item key="3" name="queryResume" to="queryResume">
+            <Menu-item key="3" name="queryResume" to="/company-home/queryResume">
                 <Icon type="chatbubbles"></Icon>
                 简历查询
             </Menu-item>

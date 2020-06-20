@@ -9,14 +9,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import axios from 'axios'
-import "layui-src/src/layui"
-import "layui-src/src/css/layui.css"
-import Moment from 'moment'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
 Vue.use(bootstrapVue)
-Vue.prototype.moment = Moment;
 Vue.use(element)
 Vue.prototype.$http = axios
 Vue.use(iView);
