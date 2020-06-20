@@ -4,7 +4,10 @@ import SignIn from "../components/Signin&SignUp/SignIn";
 import SignUp from "../components/Signin&SignUp/SignUp";
 import Index from "../components/Index"
 import AdminHome from "../components/AdminHome";
-import EmployeeHome from "../components/EmployeeHome";
+import ApplicantHome from "../components/applicant/applicant-home";
+import QueryRecruit from "../components/applicant/query-recruit";
+import Resume from "../components/applicant/resume";
+import Selfinformation from "../components/applicant/self-information";
 import CompanyHome from '@/components/company/company-home'
 import Information from '@/components/company/information'
 import QueryResume from '@/components/company/query-resume'
@@ -38,9 +41,15 @@ export default new Router({
       name:'管理员主页'
     },
     {
-      path: '/employee',
-      component: EmployeeHome,
-      name: '个人主页'
+      path: '/applicant',
+      component: ApplicantHome,
+      name: 'applicant-home',
+      title:'应聘者主页',
+      children:[
+        { path: 'self-information',title: '个人信息', name: 'information', component: resolve => { require(['@/components/applicant/self-information.vue'],resolve);}},
+        { path: 'resume',title: '简历', name: 'resume', component: resolve => { require(['@/components/applicant/resume.vue'],resolve);}},
+        { path: 'queryRecruit',title: '招聘信息', name: 'queryRecruit', component: resolve => { require(['@/components/applicant/query-recruit.vue'],resolve);}},        
+      ]
     },
     {
       path: '/company-home',

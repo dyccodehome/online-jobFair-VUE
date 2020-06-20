@@ -47,12 +47,13 @@
             alert(response.data.msg);
             localStorage.setItem("loginUser", JSON.stringify(response.data.data));
             var identity = response.data.data.is_admin_role;
+            localStorage.setItem("user_id",response.data.data.user_id) ;
             if (identity === "0") {
               that.$router.push("/admin");
             } else if (identity === "1") {
-              that.$router.push("/company");
+              that.$router.push("/company-home/information");
             } else if (identity === "2") {
-              that.$router.push("/employee")
+              that.$router.push("/applicant/self-information");
             }
           })
       }
