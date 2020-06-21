@@ -68,7 +68,7 @@
               that.$router.go(0);
             } else {
               alert("注册成功");
-              that.$router.go(0);
+              that.$router.go("/sign_in");
             }
           })
       },

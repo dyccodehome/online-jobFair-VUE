@@ -61,7 +61,7 @@
               that.$router.go(0);
             } else if(response.data.data === null){
               alert("注册成功");
-              that.$router.go(0);
+              that.$router.go(-1);
             }
           })
       },
