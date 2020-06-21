@@ -5,7 +5,7 @@
             <i-input v-model="formItem.name" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="税务号">
-            <i-input v-model="formItem.tax_number" placeholder="请输入"></i-input>
+            <i-input v-model="formItem.taxNumber" placeholder="请输入"></i-input>
         </Form-item>
        <Form-item label="公司地址">
             <i-input v-model="formItem.address" placeholder="请输入"></i-input>
@@ -14,10 +14,10 @@
             <i-input v-model="formItem.phone" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="企业法人" >
-            <i-input v-model="formItem.leagal_person" placeholder="请输入"></i-input>
+            <i-input v-model="formItem.leagalPerson" placeholder="请输入"></i-input>
         </Form-item>
          <Form-item label="注册资本">
-            <i-input v-model="formItem.registered_capital" placeholder="请输入"></i-input>
+            <i-input v-model="formItem.registeredCapital" placeholder="请输入"></i-input>
         </Form-item>
         <Form-item label="经营范围">
             <i-input v-model="formItem.scope" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入经营范围"></i-input>
@@ -37,23 +37,13 @@
             return {
                 formItem:{
                     'name':'',
-                    'tax_number': '',
+                    'taxNumber': '',
                     'phone': '',
                     'address':'',
-                    'leagal_person':'',
-                    'registered_capital': '',
+                    'leagalPerson':'',
+                    'registeredCapital': '',
                     'scope':'',
                 },
-                selectList:[
-                    {
-                        label:'有',
-                        value:0
-                    },
-                    {
-                        label:'无',
-                        value:1
-                    }
-                ]
             };
         },
 
@@ -61,6 +51,13 @@
         methods: {
             init () {
                 this.Id = localStorage.getItem("user_id");
+                axios.get('http://localhost:8080/sys/api/findCompanyById',{
+                     params:{
+                         companyId: parseInt(this.Id),
+                     }
+                }).then(({data}) => {
+                    this.formItem = data;
+                });
             },
             saveEdit() {
                 this.saveLoading = true;
