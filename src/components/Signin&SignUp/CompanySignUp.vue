@@ -66,7 +66,7 @@
             "taxNumber": this.taxNumber, 
             "name": this.name,
             "address":this.address,
-            "legalPerson":this.leagal_person,
+            "leagalPerson":this.leagal_person,
             "scope":this.scope,
             "phone":this.phone,
             "registeredCapital":this.registered_capital
