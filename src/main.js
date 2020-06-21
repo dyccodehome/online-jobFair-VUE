@@ -26,7 +26,6 @@ Vue.use(iView);
 Vue.use(ElementUI, { size: 'small' });
 Vue.prototype.$axios = axios;
 Vue.prototype.$baseUrl = 'http://localhost:8080/';
-Vue.use($);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

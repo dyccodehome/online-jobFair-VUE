@@ -223,13 +223,14 @@
                     'company_id':'',
                     'work_time':'',
                 },
-                company_id:1,
+                company_id:0,
             }
         },
 
         methods: {
             // 数据初始化、
             init() {
+                this.company_id = localStorage.getItem("user_id");
                 axios.get('http://localhost:8080/sys/api/getPage',{
                     params:{
                      pageNum:this.pageIndex,
@@ -284,14 +285,17 @@
                 });
             },
 
-            delete(params) { // 删除
-                let pkIds = [params.row.pkId];
+delete(params) { // 删除
+                let pkIds = params.row.id;
                 this.$Modal.confirm({
                     title: '提示',
                     content: '<p>确定要删除么</p>',
                     onOk: () => {
-                        axios.post('http://localhost:8080/sys/api/delRecruit',{pkIds},
-                        {headers:{'Content-Type': 'application/json; charset=utf-8'},dataType:"json",})
+                        axios.get('http://localhost:8080/sys/api/delRecruit',{
+                            params:{
+                                pkId:pkIds
+                            }
+                        })
                         .then(({data}) => {
                             if (data && data.errCode === 0) {
                                 this.$Message.success({
@@ -303,7 +307,7 @@
                                 this.$Message.error(data.errMsg);
                             }
                         }).catch(() => {
-                            this.$Message.error('连接失败，请检查网络！');
+                                        this.init();
                         });
                     },
                     onCancel: () => {

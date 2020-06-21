@@ -53,7 +53,7 @@ export default new Router({
     {
       path: '/admin',
       component: Home,
-      meta: { title: '自述文件'},
+      meta: { title: '系统首页'},
       children:[
         // {
         //   path: '/dashboard',
