@@ -3,10 +3,10 @@
     <div class="title">
       <router-link to="/sign_in"><h2>人才招聘网（企业入驻）</h2></router-link>
     </div>
-    <router-link to="/sign_up"><el-button type="success" round style="float: right;margin-top: 25px">个人注册</el-button></router-link>
+    <router-link to="/applicant/sign_up"><el-button type="success" round style="float: right;margin-top: 25px">个人注册</el-button></router-link>
     <div class="sign">
       <div class="row">
-        <router-link to="/sign_up"><h3 class="sign_up" style="text-align: center;margin-left: 200px">企业注册</h3></router-link>
+        <router-link to="/company/sign_up"><h3 class="sign_up" style="text-align: center;margin-left: 200px">企业注册</h3></router-link>
       </div>
       <div class="wirte">
         <div>
@@ -61,12 +61,12 @@
       signupClick() {
         var that = this;
         this.$http
-          .post('http://localhost:8080/user/company/sign_up', 
+          .post('http://localhost:8080/user/company/sign_up',
           {
-            "taxNumber": this.taxNumber, 
+            "taxNumber": this.taxNumber,
             "name": this.name,
             "address":this.address,
-            "legalPerson":this.leagal_person,
+            "leagalPerson":this.leagal_person,
             "scope":this.scope,
             "phone":this.phone,
             "registeredCapital":this.registered_capital

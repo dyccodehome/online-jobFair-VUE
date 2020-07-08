@@ -2,6 +2,7 @@
   <div>
     <div class="topDiv">
         <h1 class="title">人才招聘系统</h1>
+      <router-link to="/sign_in"><el-button type="primary" size="lg" style="float: right;margin-top: 20px;margin-right: 10px">退出</el-button></router-link>
     </div>
     <Menu :theme="theme3" active-key="1" :active-name="$route.name" class="menu">
         <Menu-group title="个人界面">
@@ -71,7 +72,7 @@ export default {
         background-color: #F0F0F0;
         z-index: 1;
         transition: left .3s;
-       
+
     }
 .single-page{
         margin: 35px;

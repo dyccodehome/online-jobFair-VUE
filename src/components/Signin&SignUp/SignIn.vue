@@ -1,13 +1,13 @@
 <template>
   <div class="main">
     <div class="title">
-      <router-link to="/sign_in"><h2>人才招聘网</h2></router-link>
+      <router-link to="/sign_in"><h2>人才招聘网</h2></router-link><!--页眉 系统名称-->
     </div>
-    <div class="sign">
+    <div class="sign"><!-- 登录-注册表单-->
       <div class="row">
         <router-link to="/sign_in"><h3 class="sign_in active">登录</h3></router-link>
         <a><h3>·</h3></a>
-        <router-link to="/sign_up"><h3 class="sign_up">注册</h3></router-link>
+        <router-link to="applicant/sign_up"><h3 class="sign_up">注册</h3></router-link>
       </div>
       <div class="wirte">
         <div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  // 导入的必要组件
   import 'bootstrap/dist/css/bootstrap.min.css'
   import 'bootstrap/dist/js/bootstrap.min.js'
   export default {
@@ -39,6 +40,7 @@
       }
     },
     methods: {
+      // 登陆方法，调用后台登录接口，判断is_admin_role的值，登陆成功后，跳转到相应界面
       onClick() {
         var that = this;
         this.$http
@@ -64,6 +66,7 @@
 </script>
 
 <style scoped>
+  /*css样式*/
   .main {
     height: 100%;
     min-height: 750px;

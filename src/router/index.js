@@ -38,12 +38,12 @@ export default new Router({
           component:SignIn,
         },
         {
-          path:'/sign_up',
+          path:'/applicant/sign_up',
           name:'注册',
           component:SignUp,
         },
         {
-          path: '/company_sign_up',
+          path: '/company/sign_up',
           name:'企业注册',
           component:CompanySignUp
         }

@@ -3,7 +3,7 @@
     <div class="title">
       <router-link to="/sign_in"><h2>人才招聘网</h2></router-link>
     </div>
-    <router-link to="/company_sign_up"><el-button type="success" round style="float: right;margin-top: 25px">企业注册</el-button></router-link>
+    <router-link to="/company/sign_up"><el-button type="success" round style="float: right;margin-top: 25px">企业注册</el-button></router-link>
     <div class="sign">
       <div class="row">
         <router-link to="/sign_in"><h3 class="sign_in active">登录</h3></router-link>
